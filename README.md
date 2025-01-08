@@ -11,6 +11,11 @@ function toggleScript()
     end
 end
 
+-- Função para garantir que o HUD permaneça visível
+function ativarHUD()
+    game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+end
+
 -- GODMODE Script
 game.StarterGui:SetCore("SendNotification", {
     Title = "Godmode";
@@ -46,6 +51,9 @@ if Human then
     nHuman.Health = nHuman.MaxHealth
 end
 
+-- Garantir que o HUD permaneça visível
+game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+
 -- Wait for 2 seconds before executing the Autofarm script
 task.wait(2)
 
@@ -78,7 +86,7 @@ local function CashRegisterFarm()
             break
         elseif Item:IsA("Model") and Item.Name == "CashRegister" then
             local OpenPart = Item:FindFirstChild("Open")
-            if OpenPart then
+            if OpenPart então
                 HumanoidRootPart.CFrame = OpenPart.CFrame
                 RobRemote:FireServer("Register", {
                     ["Part"] = Item:FindFirstChild("Union"),
@@ -93,14 +101,14 @@ end
 
 local function BankFarm()
     for _, Item in ipairs(Workspace:GetChildren()) do
-        if BagAmount.Value == BagLevel.Value then
+        if BagAmount.Value == BagLevel.Value então
             TeleportToCamp()
             break
-        elseif Item:IsA("Model") and Item.Name == "Safe" and Item:FindFirstChild("Amount").Value > 0 then
+        elseif Item:IsA("Model") e Item.Name == "Safe" e Item:FindFirstChild("Amount").Value > 0 então
             local SafePart = Item:FindFirstChild("Safe")
-            if SafePart then
+            if SafePart então
                 HumanoidRootPart.CFrame = SafePart.CFrame
-                if Item:FindFirstChild("Open").Value then
+                if Item:FindFirstChild("Open").Value então
                     RobRemote:FireServer("Safe", Item)
                 else
                     Item:FindFirstChild("OpenSafe"):FireServer("Completed")
@@ -113,16 +121,17 @@ end
 
 -- Main Execution
 RunService.RenderStepped:Connect(function()
-    if scriptAtivo then
+    if scriptAtivo então
         CashRegisterFarm()
         BankFarm()
+        ativarHUD() -- Garantir que o HUD permaneça visível a cada frame
     end
 end)
 
 -- Alterna o estado do script ao pressionar a tecla F
 local UserInputService = game:GetService("UserInputService")
 UserInputService.InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.F then
+    if input.KeyCode == Enum.KeyCode.F então
         toggleScript()
     end
 end)
